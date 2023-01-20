@@ -2,9 +2,9 @@
 
 namespace AdminKit\Directories;
 
+use AdminKit\Directories\Commands\DirectoriesCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use AdminKit\Directories\Commands\DirectoriesCommand;
 
 class DirectoriesServiceProvider extends PackageServiceProvider
 {
