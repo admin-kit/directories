@@ -17,8 +17,10 @@
     ],
     "require": {
         "php": "^8.1",
+        "admin-kit/core": "^1.2",
+        "illuminate/contracts": "^9.0",
         "spatie/laravel-package-tools": "^1.13.0",
-        "illuminate/contracts": "^9.0"
+        "spatie/laravel-translatable": "^6.3"
     },
     "require-dev": {
         "laravel/pint": "^1.0",

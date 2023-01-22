@@ -2,7 +2,8 @@
 
 namespace AdminKit\Directories;
 
-use AdminKit\Directories\Commands\DirectoriesCommand;
+use Illuminate\Support\Facades\Route;
+use Orchid\Support\Facades\Dashboard;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -19,7 +20,19 @@ class DirectoriesServiceProvider extends PackageServiceProvider
             ->name('directories')
             ->hasConfigFile()
             ->hasViews()
-            ->hasMigration('create_directories_table')
-            ->hasCommand(DirectoriesCommand::class);
+            ->hasMigration('create_directories_table');
+    }
+
+    public function packageRegistered()
+    {
+        $this->mergeConfigFrom(__DIR__.'/../config/directories.php', 'admin-kit.packages.directories');
+    }
+
+    public function packageBooted()
+    {
+        Route::domain((string) config('platform.domain'))
+            ->prefix(Dashboard::prefix('/'))
+            ->middleware(config('platform.middleware.private'))
+            ->group(__DIR__.'/../routes/platform.php');
     }
 }
