@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Lang;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Fields\Input;
+use Orchid\Screen\Fields\Select;
 use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Alert;
 use Orchid\Support\Facades\Layout;
@@ -16,6 +17,8 @@ class DirectoryEditScreen extends Screen
 {
     public Directory $item;
 
+    protected array $types;
+
     protected string $name;
 
     protected string $routeList;
@@ -23,6 +26,7 @@ class DirectoryEditScreen extends Screen
     public function __construct()
     {
         $this->name = __('Directory');
+        $this->types = config('admin-kit.packages.directories.models');
         $this->routeList = config('admin-kit.packages.directories.route_list');
     }
 
@@ -78,7 +82,8 @@ class DirectoryEditScreen extends Screen
 
         return [
             Layout::rows([
-                Input::make('type')
+                Select::make('type')
+                    ->options($this->types)
                     ->title(__('Type'))
                     ->required()
                     ->value($this->item->type),

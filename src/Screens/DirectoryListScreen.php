@@ -17,6 +17,8 @@ class DirectoryListScreen extends Screen
 
     protected string $namePlural;
 
+    protected array $types;
+
     protected string $routeEdit;
 
     protected string $routeCreate;
@@ -25,6 +27,7 @@ class DirectoryListScreen extends Screen
     {
         $this->name = __('Directory');
         $this->namePlural = __('Directories');
+        $this->types = config('admin-kit.packages.directories.models');
         $this->routeEdit = config('admin-kit.packages.directories.route_edit');
         $this->routeCreate = config('admin-kit.packages.directories.route_create');
     }
@@ -58,12 +61,10 @@ class DirectoryListScreen extends Screen
                 TD::make('id', __('#'))
                     ->alignCenter()
                     ->width(50)
-                    ->render(function (Directory $item) {
-                    return Link::make($item->id)->route($this->routeEdit, $item->id);
-                }),
+                    ->render(fn (Directory $item) => Link::make($item->id)->route($this->routeEdit, $item->id)),
 
                 // custom columns
-                TD::make('type', __('Type'))->render(fn (Directory $item) => $item->type),
+                TD::make('type', __('Type'))->render(fn (Directory $item) => $this->types[$item->type] ?? ''),
                 TD::make('name', __('Name'))->render(fn (Directory $item) => $item->name),
 
                 // actions
