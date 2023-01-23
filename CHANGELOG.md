@@ -2,6 +2,11 @@
 
 All notable changes to `directories` will be documented in this file.
 
+## v1.0.1 - 2023-01-23
+
+- add create directory model command
+- update readme
+
 ## v1.0.0 - 2023-01-22
 
 - add Screens
