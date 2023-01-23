@@ -19,7 +19,6 @@ class DirectoriesServiceProvider extends PackageServiceProvider
          */
         $package
             ->name('directories')
-            ->hasConfigFile()
             ->hasViews()
             ->hasCommand(ModelCommand::class)
             ->hasMigration('create_directories_table');
