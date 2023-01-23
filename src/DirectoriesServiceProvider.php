@@ -2,6 +2,7 @@
 
 namespace AdminKit\Directories;
 
+use AdminKit\Directories\Commands\ModelCommand;
 use Illuminate\Support\Facades\Route;
 use Orchid\Support\Facades\Dashboard;
 use Spatie\LaravelPackageTools\Package;
@@ -20,6 +21,7 @@ class DirectoriesServiceProvider extends PackageServiceProvider
             ->name('directories')
             ->hasConfigFile()
             ->hasViews()
+            ->hasCommand(ModelCommand::class)
             ->hasMigration('create_directories_table');
     }
 

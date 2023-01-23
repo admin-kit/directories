@@ -1,7 +1,8 @@
 <?php
 
-namespace AdminKit\Directories\Models;
+namespace App\Models;
 
+use AdminKit\Directories\Models\Directory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Carbon;
 
@@ -13,15 +14,16 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  */
-class Example extends Directory
+class {SingularName} extends Directory
 {
     protected $table = 'directories';
 
     public static function boot()
     {
         parent::boot();
-        static::addGlobalScope('example', function (Builder $builder) {
-            $builder->where('type', 'example');
+        static::addGlobalScope('{SingularName}', function (Builder $builder) {
+            $builder->where('type', '{SingularName}');
         });
+        static::creating(fn($model) => $model->type = '{SingularName}');
     }
 }

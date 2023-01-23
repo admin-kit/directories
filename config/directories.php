@@ -5,8 +5,7 @@ return [
     'prefix' => '/directories',
 
     'models' => [
-        'examples' => 'Example',
-        'cities' => 'Город',
+        // 'ModelName' => 'Admin select name',
     ],
 
     'route_list' => 'platform.directories.list',
