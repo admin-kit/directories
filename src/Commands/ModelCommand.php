@@ -13,8 +13,11 @@ class ModelCommand extends Command
     protected $description = 'Make Directory Model';
 
     private string $singularName;
+
     private string $snakeDashName;
+
     private string $snakeUnderscoreName;
+
     private array $replacement;
 
     public function handle()
@@ -24,7 +27,7 @@ class ModelCommand extends Command
         $this->createFiles();
 
         // display navigation in console
-        $config = file_get_contents(__DIR__ . '/../../stubs/config/admin-kit.stub');
+        $config = file_get_contents(__DIR__.'/../../stubs/config/admin-kit.stub');
         $config = str_replace(array_keys($this->replacement), array_values($this->replacement), $config);
         $this->comment('// вставить в файл: config/admin-kit.php');
         $this->info($config);
@@ -46,13 +49,13 @@ class ModelCommand extends Command
     private function fileBindings(): array
     {
         return [
-            __DIR__ . '/../../stubs/app/Models/Template.stub' => app_path("Models/$this->singularName.php"),
+            __DIR__.'/../../stubs/app/Models/Template.stub' => app_path("Models/$this->singularName.php"),
         ];
     }
 
     private function createFolders()
     {
-        if (!file_exists(app_path('/Models'))) {
+        if (! file_exists(app_path('/Models'))) {
             mkdir(app_path('/Models'), 0777, true);
         }
     }
