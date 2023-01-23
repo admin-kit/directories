@@ -15,7 +15,7 @@ You can install the package via composer:
 composer require admin-kit/directories
 ```
 
-Вам нужно добавить меню в `PlatformProvider.php`
+Добавить меню в `PlatformProvider.php`
 ```php
 public function registerMainMenu(): array
 {
@@ -28,30 +28,30 @@ public function registerMainMenu(): array
 }
 ```
 
-You can publish and run the migrations with:
+Опубликовать миграции:
 
 ```bash
 php artisan vendor:publish --tag="directories-migrations"
 php artisan migrate
 ```
 
-You can publish the config file with:
-
-```bash
-php artisan vendor:publish --tag="directories-config"
-```
-
-Optionally, you can publish the views using
-
-```bash
-php artisan vendor:publish --tag="directories-views"
-```
-
 ## Usage
 
+Создать модель `City`:
 ```php
-$directories = new AdminKit\Directories();
-echo $directories->echoPhrase('Hello, AdminKit!');
+php artisan admin-kit:model-category City
+```
+
+Добавить в конфиг файла `config/admin-kit.php`
+```php
+'packages' => [
+    'directories' => [
+        // ...
+        'models' => [
+            'City' => 'City name',
+        ],
+    ],
+],
 ```
 
 ## Testing
