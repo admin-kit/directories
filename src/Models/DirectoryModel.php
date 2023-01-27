@@ -46,6 +46,7 @@ class DirectoryModel extends Model
     public static function getClassShortName(): string
     {
         $fullName = explode('\\', static::class);
+
         return end($fullName);
     }
 }
