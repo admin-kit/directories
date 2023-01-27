@@ -31,6 +31,8 @@ class DirectoriesServiceProvider extends PackageServiceProvider
 
     public function packageBooted()
     {
+        $this->app->register(PermissionServiceProvider::class);
+
         Route::domain((string) config('platform.domain'))
             ->prefix(Dashboard::prefix('/'))
             ->middleware(config('platform.middleware.private'))

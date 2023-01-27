@@ -42,6 +42,13 @@ class DirectoryEditScreen extends Screen
         return $this->item->exists ? __('Edit')." $this->name #{$this->item->id}" : __('Create')." $this->name";
     }
 
+    public function permission(): ?iterable
+    {
+        return [
+            'admin-kit.directories',
+        ];
+    }
+
     public function commandBar(): iterable
     {
         return [

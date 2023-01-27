@@ -44,6 +44,13 @@ class DirectoryListScreen extends Screen
         return $this->namePlural;
     }
 
+    public function permission(): ?iterable
+    {
+        return [
+            'admin-kit.directories',
+        ];
+    }
+
     public function commandBar(): iterable
     {
         return [
