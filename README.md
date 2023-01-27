@@ -21,9 +21,10 @@ public function registerMainMenu(): array
 {
     // ...
 
-    Menu::make(__('Directories'))
-        ->icon('folder-alt')
-        ->route('platform.directories'),
+    Menu::make(__(Directories::NAME_PLURAL))
+        ->icon(Directories::ICON)
+        ->route(Directories::ROUTE_LIST)
+        ->permission(Directories::PERMISSION),
 }
 ```
 
@@ -33,6 +34,10 @@ public function registerMainMenu(): array
 php artisan vendor:publish --tag="directories-migrations"
 php artisan migrate
 ```
+
+**Важно!**  
+Необходимо выдать вашему пользователю доступ к пакету, в настройках пользователя(или роли).
+Тогда и отобразится меню.
 
 ## Usage
 

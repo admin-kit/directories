@@ -2,6 +2,7 @@
 
 namespace AdminKit\Directories\Screens;
 
+use AdminKit\Directories\Directories;
 use AdminKit\Directories\Models\Directory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -17,19 +18,6 @@ class DirectoryEditScreen extends Screen
 {
     public Directory $item;
 
-    protected array $types;
-
-    protected string $name;
-
-    protected string $routeList;
-
-    public function __construct()
-    {
-        $this->name = __('Directory');
-        $this->types = config('admin-kit.packages.directories.models');
-        $this->routeList = config('admin-kit.packages.directories.route_list');
-    }
-
     public function query(Directory $item): iterable
     {
         return [
@@ -39,13 +27,15 @@ class DirectoryEditScreen extends Screen
 
     public function name(): ?string
     {
-        return $this->item->exists ? __('Edit')." $this->name #{$this->item->id}" : __('Create')." $this->name";
+        return $this->item->exists
+            ? __('Edit').' '.__(Directories::NAME).' #'.$this->item->id
+            : __('Create').' '.__(Directories::NAME);
     }
 
     public function permission(): ?iterable
     {
         return [
-            'admin-kit.directories',
+            Directories::PERMISSION,
         ];
     }
 
@@ -74,6 +64,7 @@ class DirectoryEditScreen extends Screen
     {
         $defaultLocale = Lang::getLocale();
         $locales = config('admin-kit.locales');
+        $models = config('admin-kit.packages.directories.models');
 
         $tabs = [];
         foreach ($locales as $locale) {
@@ -90,7 +81,7 @@ class DirectoryEditScreen extends Screen
         return [
             Layout::rows([
                 Select::make('type')
-                    ->options($this->types)
+                    ->options($models)
                     ->title(__('Type'))
                     ->required()
                     ->value($this->item->type),
@@ -111,16 +102,16 @@ class DirectoryEditScreen extends Screen
         ]);
 
         $item->fill($validated)->save();
-        Alert::info(__('You have successfully saved').' '.$this->name);
+        Alert::info(__('You have successfully saved').' '.__(Directories::NAME));
 
-        return redirect()->route($this->routeList);
+        return redirect()->route(Directories::ROUTE_LIST);
     }
 
     public function remove(Directory $item): RedirectResponse
     {
         $item->delete();
-        Alert::info(__('You have successfully deleted').' '.$this->name);
+        Alert::info(__('You have successfully deleted').' '.__(Directories::NAME));
 
-        return redirect()->route($this->routeList);
+        return redirect()->route(Directories::ROUTE_LIST);
     }
 }

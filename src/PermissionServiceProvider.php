@@ -11,7 +11,7 @@ class PermissionServiceProvider extends ServiceProvider
     public function boot(Dashboard $dashboard)
     {
         $permissions = ItemPermission::group(__('Admin-Kit'))
-            ->addPermission('admin-kit.directories', __('Directories'));
+            ->addPermission(Directories::PERMISSION, __(Directories::NAME_PLURAL));
 
         $dashboard->registerPermissions($permissions);
     }

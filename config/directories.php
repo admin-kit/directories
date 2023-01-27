@@ -8,7 +8,5 @@ return [
         // 'ModelName' => 'Admin select name',
     ],
 
-    'route_list' => 'platform.directories.list',
-    'route_edit' => 'platform.directories.edit',
-    'route_create' => 'platform.directories.create',
+    'instance' => \AdminKit\Directories\Directories::class,
 ];
