@@ -7,6 +7,7 @@ use AdminKit\Directories\Models\Directory;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\DropDown;
 use Orchid\Screen\Actions\Link;
+use Orchid\Screen\Fields\Select;
 use Orchid\Screen\Screen;
 use Orchid\Screen\TD;
 use Orchid\Support\Facades\Alert;
@@ -17,7 +18,11 @@ class DirectoryListScreen extends Screen
     public function query(): iterable
     {
         return [
-            'items' => Directory::orderByDesc('id')->paginate(),
+            'items' => Directory::query()
+                ->filters()
+                ->orderBy('type')
+                ->orderBy('id', 'desc')
+                ->paginate(),
         ];
     }
 
@@ -52,11 +57,18 @@ class DirectoryListScreen extends Screen
                 TD::make('id', __('#'))
                     ->alignCenter()
                     ->width(50)
+                    ->sort()
                     ->render(fn (Directory $item) => Link::make($item->id)->route(Directories::ROUTE_EDIT, $item->id)),
 
                 // custom columns
-                TD::make('type', __('Type'))->render(fn (Directory $item) => $models[$item->type] ?? ''),
-                TD::make('name', __('Name'))->render(fn (Directory $item) => $item->name),
+                TD::make('type', __('Type'))
+                    ->filter(Select::make()
+                        ->options($models))
+                    ->sort()
+                    ->render(fn (Directory $item) => $models[$item->type] ?? ''),
+                TD::make('name', __('Name'))
+                    ->sort()
+                    ->render(fn (Directory $item) => $item->name),
 
                 // actions
                 TD::make('edit', __('Actions'))
