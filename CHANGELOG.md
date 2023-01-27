@@ -2,6 +2,10 @@
 
 All notable changes to `directories` will be documented in this file.
 
+## v1.0.2 - 2023-01-27
+
+- add directories permission
+
 ## v1.0.1 - 2023-01-23
 
 - add create directory model command
