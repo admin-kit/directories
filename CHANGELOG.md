@@ -2,6 +2,11 @@
 
 All notable changes to `directories` will be documented in this file.
 
+## v1.0.3 - 2023-01-27
+
+- refactor config variables
+- add filter on type
+
 ## v1.0.2 - 2023-01-27
 
 - add directories permission
