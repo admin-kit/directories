@@ -2,28 +2,8 @@
 
 namespace App\Models;
 
-use AdminKit\Directories\Models\Directory;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Carbon;
+use AdminKit\Directories\Models\DirectoryModel;
 
-/**
- * @property int $id
- * @property int $parent_id
- * @property string $name
- * @property string $type
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
- */
-class {SingularName} extends Directory
+class {SingularName} extends DirectoryModel
 {
-    protected $table = 'directories';
-
-    public static function boot()
-    {
-        parent::boot();
-        static::addGlobalScope('{SingularName}', function (Builder $builder) {
-            $builder->where('type', '{SingularName}');
-        });
-        static::creating(fn($model) => $model->type = '{SingularName}');
-    }
 }
