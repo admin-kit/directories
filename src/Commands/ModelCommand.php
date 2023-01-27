@@ -8,7 +8,7 @@ use Illuminate\Support\Str;
 
 class ModelCommand extends Command
 {
-    protected $signature = 'admin-kit:model-directory {name}';
+    protected $signature = 'admin-kit:directories-model {name}';
 
     protected $description = 'Make Directory Model';
 

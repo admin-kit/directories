@@ -23,8 +23,7 @@ public function registerMainMenu(): array
 
     Menu::make(__('Directories'))
         ->icon('folder-alt')
-        ->route('platform.directories')
-        ->permission('platform.directories'),
+        ->route('platform.directories'),
 }
 ```
 
@@ -37,9 +36,11 @@ php artisan migrate
 
 ## Usage
 
+Пример, чтобы создать новый справочник, необходимо выполнить следующие условия:
+
 Создать модель `City`:
 ```php
-php artisan admin-kit:model-category City
+php artisan admin-kit:directories-model City
 ```
 
 Добавить в конфиг файла `config/admin-kit.php`
@@ -48,7 +49,7 @@ php artisan admin-kit:model-category City
     'directories' => [
         // ...
         'models' => [
-            'City' => 'City name',
+            'City' => 'Город',
         ],
     ],
 ],
