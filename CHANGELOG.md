@@ -2,6 +2,10 @@
 
 All notable changes to `directories` will be documented in this file.
 
+## v1.1.0 - 2023-01-29
+
+- add custom properties in config
+
 ## v1.0.4 - 2023-01-27
 
 - add DirectoryModel, default model
