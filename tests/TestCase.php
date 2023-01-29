@@ -5,6 +5,7 @@ namespace AdminKit\Directories\Tests;
 use AdminKit\Directories\DirectoriesServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
+use Orchid\Platform\Providers\FoundationServiceProvider;
 
 class TestCase extends Orchestra
 {
@@ -21,6 +22,7 @@ class TestCase extends Orchestra
     {
         return [
             DirectoriesServiceProvider::class,
+            FoundationServiceProvider::class,
         ];
     }
 
