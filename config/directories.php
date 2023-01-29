@@ -5,15 +5,18 @@ return [
     'prefix' => '/directories',
 
     'models' => [
-        // 'ModelName' => 'Admin select name',
+        // [
+        //     'name' => 'ModelName',
+        //     'title' => 'Admin select name',
+        // ],
     ],
 
     'properties' => [
-        //        [
-        //            'key' => 'color',
-        //            'name' => 'Color',
-        //            'required' => false,
-        //        ],
+        // [
+        //     'key' => 'code',
+        //     'title' => 'Code',
+        //     'required' => false,
+        // ],
     ],
 
     'instance' => \AdminKit\Directories\Directories::class,

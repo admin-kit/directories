@@ -64,7 +64,11 @@ class DirectoryEditScreen extends Screen
     {
         $defaultLocale = Lang::getLocale();
         $locales = config('admin-kit.locales');
-        $models = config('admin-kit.packages.directories.models');
+        $models = collect(config('admin-kit.packages.directories.models'));
+        $properties = collect(config('admin-kit.packages.directories.properties'));
+        $options = $models
+            ->mapWithKeys(fn ($model) => [$model['name'] => $model['title']])
+            ->toArray();
 
         $tabs = [];
         foreach ($locales as $locale) {
@@ -78,10 +82,10 @@ class DirectoryEditScreen extends Screen
             ];
         }
 
-        $properties = [];
-        foreach (config('admin-kit.packages.directories.properties') ?? [] as $property) {
-            $properties[] = Input::make('properties['.$property['key'].']')
-                ->title(__($property['name']))
+        $fields = [];
+        foreach ($properties as $property) {
+            $fields[] = Input::make('properties['.$property['key'].']')
+                ->title(__($property['title']))
                 ->required($property['required'])
                 ->value($this->item->getProperty($property['key']));
         }
@@ -90,11 +94,11 @@ class DirectoryEditScreen extends Screen
             Layout::tabs($tabs),
             Layout::rows([
                 Select::make('type')
-                    ->options($models)
+                    ->options($options)
                     ->title(__('Type'))
                     ->required()
                     ->value($this->item->type),
-                ...$properties,
+                ...$fields,
             ]),
         ];
     }

@@ -49,7 +49,10 @@ class DirectoryListScreen extends Screen
 
     public function layout(): iterable
     {
-        $models = config('admin-kit.packages.directories.models');
+        $models = collect(config('admin-kit.packages.directories.models'));
+        $options = $models
+            ->mapWithKeys(fn ($model) => [$model['name'] => $model['title']])
+            ->toArray();
 
         return [
             Layout::table('items', [
@@ -64,9 +67,9 @@ class DirectoryListScreen extends Screen
                 TD::make('type', __('Type'))
                     ->width(200)
                     ->filter(Select::make()
-                        ->options($models))
+                        ->options($options))
                     ->sort()
-                    ->render(fn (Directory $item) => $models[$item->type] ?? ''),
+                    ->render(fn (Directory $item) => $models->where('name', $item->type)->first()['title'] ?? ''),
                 TD::make('name', __('Name'))
                     ->sort()
                     ->render(fn (Directory $item) => $item->name),
