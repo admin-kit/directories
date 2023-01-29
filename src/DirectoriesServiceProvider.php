@@ -21,7 +21,10 @@ class DirectoriesServiceProvider extends PackageServiceProvider
             ->name('directories')
             ->hasViews()
             ->hasCommand(ModelCommand::class)
-            ->hasMigration('create_directories_table');
+            ->hasMigrations([
+                'create_directories_table',
+                'add_properties_column_in_directories_table',
+            ]);
     }
 
     public function packageRegistered()

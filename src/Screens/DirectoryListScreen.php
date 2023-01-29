@@ -62,6 +62,7 @@ class DirectoryListScreen extends Screen
 
                 // custom columns
                 TD::make('type', __('Type'))
+                    ->width(200)
                     ->filter(Select::make()
                         ->options($models))
                     ->sort()

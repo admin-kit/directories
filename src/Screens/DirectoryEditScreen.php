@@ -78,15 +78,24 @@ class DirectoryEditScreen extends Screen
             ];
         }
 
+        $properties = [];
+        foreach (config('admin-kit.packages.directories.properties') ?? [] as $property) {
+            $properties[] = Input::make('properties['.$property['key'].']')
+                ->title(__($property['name']))
+                ->required($property['required'])
+                ->value($this->item->getProperty($property['key']));
+        }
+
         return [
+            Layout::tabs($tabs),
             Layout::rows([
                 Select::make('type')
                     ->options($models)
                     ->title(__('Type'))
                     ->required()
                     ->value($this->item->type),
+                ...$properties,
             ]),
-            Layout::tabs($tabs),
         ];
     }
 
@@ -99,6 +108,7 @@ class DirectoryEditScreen extends Screen
             'type' => ['required', 'string', 'max:20'],
             'name' => ['required', "array:$locales"],
             "name.$defaultLocale" => ['required', 'string', 'max:255'],
+            'properties' => ['nullable', 'array'],
         ]);
 
         $item->fill($validated)->save();

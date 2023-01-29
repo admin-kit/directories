@@ -9,6 +9,8 @@ use Orchid\Filters\Filterable;
 use Spatie\Translatable\HasTranslations;
 
 /**
+ * Admin Directory Model
+ *
  * @property int $id
  * @property int $parent_id
  * @property string $name
@@ -24,6 +26,7 @@ class Directory extends Model
         'parent_id',
         'type',
         'name',
+        'properties',
     ];
 
     protected $translatable = [
@@ -44,4 +47,13 @@ class Directory extends Model
         'created_at',
         'updated_at',
     ];
+
+    protected $casts = [
+        'properties' => 'array',
+    ];
+
+    public function getProperty(string $key)
+    {
+        return $this->properties[$key] ?? null;
+    }
 }

@@ -8,5 +8,13 @@ return [
         // 'ModelName' => 'Admin select name',
     ],
 
+    'properties' => [
+        //        [
+        //            'key' => 'color',
+        //            'name' => 'Color',
+        //            'required' => false,
+        //        ],
+    ],
+
     'instance' => \AdminKit\Directories\Directories::class,
 ];

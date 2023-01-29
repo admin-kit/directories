@@ -9,6 +9,8 @@ use Illuminate\Support\Carbon;
 use Spatie\Translatable\HasTranslations;
 
 /**
+ * Generated extendable other Model
+ *
  * @property int $id
  * @property int $parent_id
  * @property string $name
@@ -26,11 +28,21 @@ class DirectoryModel extends Model
         'parent_id',
         'type',
         'name',
+        'properties',
     ];
 
     protected $translatable = [
         'name',
     ];
+
+    protected $casts = [
+        'properties' => 'array',
+    ];
+
+    public function getProperty(string $key)
+    {
+        return $this->properties[$key] ?? null;
+    }
 
     public static function boot()
     {
